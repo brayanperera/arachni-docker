@@ -29,7 +29,7 @@ fi
 
 if [[ -z $1 ]]; then
   cd $PATH_ARACHNI
-  bin/arachni_web
+  bin/arachni_web -o 0.0.0.0
 else
 
   if [[ -z $4 ]]; then
