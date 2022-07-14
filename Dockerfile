@@ -29,4 +29,4 @@ USER arachni
 
 EXPOSE 9292
 
-ENTRYPOINT ['/usr/local/bin/entrypoint.sh']
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
