@@ -43,24 +43,26 @@ else
   login_required=$4
 
   if [[ "$login_required" == "true" ]]; then
-
     if [[ -z $5 ]]; then
-      print_usage()
+      print_usage
       exit 1
     fi
 
     login_url=$5
     login_params=$6
     login_check=$7
+    cd $PATH_ARACHNI
     bin\arachni ${url} --plugin=autologin:url=${login_url},parameters="${login_params}",check="${login_check}" \
     --scope-exclude-pattern=${exclude_pattern}  --audit-links --audit-forms --audit-cookies --audit-nested-cookies \
     --audit-headers --audit-jsons --audit-xmls --audit-ui-forms --report-save-path reports
 
   else
+    cd $PATH_ARACHNI
     bin\arachni ${url} --scope-exclude-pattern=${exclude_pattern}  --audit-links --audit-forms \
     --audit-cookies --audit-nested-cookies --audit-headers --audit-jsons --audit-xmls --audit-ui-forms \
     --report-save-path reports
   fi
+
 fi
 
 
