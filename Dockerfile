@@ -22,6 +22,7 @@ RUN wget https://github.com/Arachni/arachni/releases/download/v${ARACHNI_MAJOR_V
     rm -rf *.tar.gz
 RUN mkdir -p /usr/local/arachni/.system/logs/webui /usr/local/arachni/.system/tmp
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 EXPOSE 9292
 
 ENTRYPOINT ['/usr/local/bin/entrypoint.sh']
