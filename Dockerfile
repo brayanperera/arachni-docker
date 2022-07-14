@@ -28,6 +28,12 @@ RUN useradd -u 1000 arachni
 RUN chown -R arachni:arachni /usr/local/arachni
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get update && apt-get install google-chrome-stable -y
+RUN rm -rf /usr/local/arachni/.system/opt/google/chrome && ln -s /opt/google/chrome /usr/local/arachni/.system/opt/google/chrome
+
 USER arachni
 
 EXPOSE 9292
