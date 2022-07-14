@@ -22,7 +22,7 @@ RUN wget https://github.com/Arachni/arachni/releases/download/v${ARACHNI_MAJOR_V
     rm -rf *.tar.gz
 RUN mkdir -p /usr/local/arachni/.system/logs/webui /usr/local/arachni/.system/tmp
 RUN wget https://chromedriver.storage.googleapis.com/104.0.5112.29/chromedriver_linux64.zip
-RUN unzip chromedriver_linux64.zip && mv chromedriver /usr/local/arachni/.system/bin/chromedriver
+RUN unzip chromedriver_linux64.zip && mv chromedriver /usr/local/arachni/.system/usr/bin/chromedriver
 
 RUN useradd -u 1000 arachni
 RUN chown -R arachni:arachni /usr/local/arachni
