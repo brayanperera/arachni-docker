@@ -52,15 +52,16 @@ else
     login_params=$6
     login_check=$7
     cd $PATH_ARACHNI
-    bin\arachni ${url} --plugin=autologin:url=${login_url},parameters="${login_params}",check="${login_check}" \
+    bin/arachni ${url} --plugin=autologin:url=${login_url},parameters="${login_params}",check="${login_check}" \
     --scope-exclude-pattern=${exclude_pattern}  --audit-links --audit-forms --audit-cookies --audit-nested-cookies \
     --audit-headers --audit-jsons --audit-xmls --audit-ui-forms --report-save-path reports
 
   else
     cd $PATH_ARACHNI
-    bin\arachni ${url} --scope-exclude-pattern=${exclude_pattern}  --audit-links --audit-forms \
+    bin/arachni ${url} --scope-exclude-pattern=${exclude_pattern}  --audit-links --audit-forms \
     --audit-cookies --audit-nested-cookies --audit-headers --audit-jsons --audit-xmls --audit-ui-forms \
     --report-save-path reports
+    bin/arachni_reporter --reporter "html:outfile=${report_name}.zip" reports/${report_name}.afr
   fi
 
 fi
