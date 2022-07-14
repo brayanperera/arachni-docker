@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 PATH_ARACHNI="/usr/local/arachni"
 FILE_DB_PGSQL_TEMPLATE="${PATH_ARACHNI}/.system/arachni-ui-web/config/database.yml.pgsql"
