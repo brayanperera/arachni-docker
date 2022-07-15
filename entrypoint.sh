@@ -27,38 +27,28 @@ if [ "postgresql" = "${DB_ADAPTER}" ]; then
   setupPostgresqlDB
 fi
 
-if [[ -z $1 ]]; then
+if [[ -z $TARGET_URL ]]; then
   cd $PATH_ARACHNI
   bin/arachni_web -o 0.0.0.0
 else
 
-  if [[ -z $4 ]]; then
-    print_usage
-    exit 1
-  fi
-
-  url=$1
-  report_name=$2
-  exclude_pattern=$3
-  login_required=$4
-
-  if [[ "$login_required" == "true" ]]; then
-    if [[ -z $5 ]]; then
+  if [[ "$LOGIN_ENABLED" == "true" ]]; then
+    if [[ -z $LOGIN_URL ]] || [[ -z $LOGIN_PARAMS ]] || [[ -z $LOGIN_CONFIRM_PATTERN ]]; then
       print_usage
       exit 1
     fi
 
-    login_url=$5
-    login_params=$6
-    login_check=$7
+    login_url=$LOGIN_URL
+    login_params=$LOGIN_PARAMS
+    login_check=$LOGIN_CONFIRM_PATTERN
     cd $PATH_ARACHNI
-    bin/arachni ${url} --plugin=autologin:url=${login_url},parameters="${login_params}",check="${login_check}" \
-    --scope-exclude-pattern=${exclude_pattern}  --audit-links --audit-forms --audit-cookies --audit-nested-cookies \
+    bin/arachni ${TARGET_URL} --plugin=autologin:url=${LOGIN_URL},parameters="${LOGIN_PARAMS}",check="${LOGIN_CONFIRM_PATTERN}" \
+    --scope-exclude-pattern=${EXCLUDE_PATTERN}  --audit-links --audit-forms --audit-cookies --audit-nested-cookies \
     --audit-headers --audit-jsons --audit-xmls --audit-ui-forms --report-save-path reports
 
   else
     cd $PATH_ARACHNI
-    bin/arachni ${url} --scope-exclude-pattern=${exclude_pattern}  --audit-links --audit-forms \
+    bin/arachni ${TARGET_URL} --scope-exclude-pattern=${EXCLUDE_PATTERN}  --audit-links --audit-forms \
     --audit-cookies --audit-nested-cookies --audit-headers --audit-jsons --audit-xmls --audit-ui-forms \
     --report-save-path reports
     bin/arachni_reporter --reporter "html:outfile=${report_name}.zip" reports/${report_name}.afr
