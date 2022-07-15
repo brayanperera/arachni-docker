@@ -38,9 +38,6 @@ else
       exit 1
     fi
 
-    login_url=$LOGIN_URL
-    login_params=$LOGIN_PARAMS
-    login_check=$LOGIN_CONFIRM_PATTERN
     cd $PATH_ARACHNI
     bin/arachni ${TARGET_URL} --plugin=autologin:url=${LOGIN_URL},parameters="${LOGIN_PARAMS}",check="${LOGIN_CONFIRM_PATTERN}" \
     --scope-exclude-pattern=${EXCLUDE_PATTERN}  --audit-links --audit-forms --audit-cookies --audit-nested-cookies \
@@ -51,7 +48,10 @@ else
     bin/arachni ${TARGET_URL} --scope-exclude-pattern=${EXCLUDE_PATTERN}  --audit-links --audit-forms \
     --audit-cookies --audit-nested-cookies --audit-headers --audit-jsons --audit-xmls --audit-ui-forms \
     --report-save-path reports
-    bin/arachni_reporter --reporter "html:outfile=${report_name}.zip" reports/${report_name}.afr
+
+    report_file=$(ls -t reports/*.afr  | head -n 1)
+
+    bin/arachni_reporter --reporter "html:outfile=${REPORT_NAME}.zip" reports/${report_file}
   fi
 
 fi
