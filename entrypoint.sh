@@ -52,6 +52,7 @@ else
     report_file=$(ls -t reports/*.afr  | head -n 1)
 
     bin/arachni_reporter --reporter "html:outfile=reports/${REPORT_NAME}.zip" reports/${REPORT_NAME}
+    bin/arachni_reporter --reporter "json:outfile=reports/${REPORT_NAME}.json" reports/${REPORT_NAME}
   fi
 
 fi
