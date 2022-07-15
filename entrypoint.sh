@@ -27,7 +27,7 @@ if [ "postgresql" = "${DB_ADAPTER}" ]; then
   setupPostgresqlDB
 fi
 
-if [[ -z $TARGET_URL ]]; then
+if [[ "$CLI_ENABLED" == "false" ]]; then
   cd $PATH_ARACHNI
   bin/arachni_web -o 0.0.0.0
 else
