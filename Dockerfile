@@ -3,17 +3,17 @@ FROM ubuntu:22.04
 MAINTAINER Brayan Perera
 ARG ARACHNI_MAJOR_VERSION=1.6.1.3
 ARG ARACHNI_VERSION=1.6.1.3-0.6.1.1
-ENV ARACHNI_USERNAME arachni
-ENV ARACHNI_PASSWORD password
+ENV ARACHNI_ADMIN_PASSWORD arachni
+ENV ARACHNI_USERNAME arachni@example.com
+ENV ARACHNI_PASSWORD arachni
+ENV DB_HOST localhost
+ENV DB_NAME arachni
+ENV DB_USER arachni
+ENV DB_PASS arachni
 ENV DB_ADAPTER sqlite
 ENV CLI_ENABLED false
-ENV TARGET_URL https://google.com
-ENV EXCLUDE_PATTERN logout
 ENV REPORT_NAME arachni-report
 ENV LOGIN_ENABLED true
-ENV LOGIN_URL https://google.com
-ENV LOGIN_PARAMS username=${ARACHNI_USERNAME}&password=${ARACHNI_PASSWORD}
-ENV LOGIN_CONFIRM_PATTERN logout
 
 
 RUN apt-get update && apt-get upgrade -y

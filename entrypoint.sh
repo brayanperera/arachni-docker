@@ -27,6 +27,11 @@ if [ "postgresql" = "${DB_ADAPTER}" ]; then
   setupPostgresqlDB
 fi
 
+cd $PATH_ARACHNI
+bin/arachni_web_change_password admin@admin.admin ${ARACHNI_ADMIN_PASSWORD}
+bin/arachni_web_change_password user@user.user ${ARACHNI_PASSWORD}
+bin/arachni_web_create_user ${ARACHNI_USER} ${ARACHNI_PASSWORD} ${ARACHNI_USER}
+
 if [[ "$CLI_ENABLED" == "false" ]]; then
   cd $PATH_ARACHNI
   bin/arachni_web -o 0.0.0.0
